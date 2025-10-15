@@ -1,0 +1,55 @@
+name: Pull from BlogGuru & Publish Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]  # optional
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target repo (fueltheaura-site)
+        uses: actions/checkout@v4
+
+      - name: Checkout BlogGuru (read-only)
+        uses: actions/checkout@v4
+        with:
+          repository: mrm413/BlogGuru
+          token: ${{ secrets.BLOGGURU_READ }}
+          path: blogsrc
+          fetch-depth: 1
+
+      - name: Prepare site
+        run: |
+          rm -rf dist && mkdir -p dist
+          if [ -d "blogsrc/publish" ]; then
+            cp -r blogsrc/publish/* dist/
+          else
+            echo "<h1>FuelTheAura — coming online</h1>" > dist/index.html
+          fi
+
+      - name: Push to gh-pages
+        run: |
+          set -e
+          git config user.name  "pages-bot"
+          git config user.email "actions@github.com"
+
+          # create/update gh-pages worktree
+          rm -rf out
+          git fetch origin gh-pages || true
+          git worktree add -B gh-pages out origin/gh-pages 2>/dev/null || git worktree add -B gh-pages out
+
+          # clean and copy
+          rm -rf out/* out/.[!.]* out/..?* || true
+          cp -r dist/* out/ || true
+
+          cd out
+          git add -A
+          git commit -m "Publish from BlogGuru $(git -C ../blogsrc rev-parse --short HEAD)" || echo "Nothing to commit"
+          git push origin gh-pages
