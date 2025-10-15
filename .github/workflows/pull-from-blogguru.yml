@@ -20,7 +20,7 @@ jobs:
       - name: Checkout BlogGuru (read-only)
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.repository_owner }}/'"'"'BlogGuru'"'"'
+          repository: mrm413/BlogGuru
           token: ${{ secrets.BLOGGURU_READ }}
           path: blogsrc
           fetch-depth: 1
