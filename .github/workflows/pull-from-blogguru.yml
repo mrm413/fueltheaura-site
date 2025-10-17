@@ -23,19 +23,25 @@ jobs:
       - name: Checkout target repo
         uses: actions/checkout@v4
 
-      # Quick diagnostic: prove the PAT can read the private BlogGuru repo
+      # Prove BLOGURU_TOKEN can read the private repo and show scopes
       - name: Diagnose PAT access
         shell: bash
         run: |
           set -euo pipefail
-          code=$(curl -sS -o /dev/null -w "%{http_code}" \
+          echo "== GET /repos/mrm413/BlogGuru =="
+          code=$(curl -sS -o resp.json -w "%{http_code}" \
             -H "Authorization: token ${{ secrets.BLOGURU_TOKEN }}" \
             -H "User-Agent: pat-diag" \
             https://api.github.com/repos/mrm413/BlogGuru)
-          echo "GET /repos -> HTTP $code"
+          echo "HTTP: $code"
+          echo "== Headers (scopes) =="
+          curl -sSI -H "Authorization: token ${{ secrets.BLOGURU_TOKEN }}" -H "User-Agent: pat-diag" https://api.github.com/repos/mrm413/BlogGuru \
+            | grep -iE 'x-oauth-scopes|x-accepted-oauth-scopes|x-github-sso|x-ratelimit-remaining' || true
+          echo "== Body (first 300B) =="
+          head -c 300 resp.json; echo
           test "$code" = "200"
 
-      # Use PAT-backed git clone (avoid actions/checkout metadata calls)
+      # Use PAT-backed git clone (avoid actions/checkout repo metadata calls)
       - name: Checkout BlogGuru (read-only)
         shell: bash
         run: |
@@ -53,7 +59,7 @@ jobs:
           if [ -d "blogsrc/publish" ]; then
             cp -r blogsrc/publish/* dist/
           else
-            echo "<h1>FuelTheAura - coming online</h1>" > dist/index.html
+            echo "<h1>FuelTheAura — coming online</h1>" > dist/index.html
           fi
 
       - name: Upload Pages artifact
