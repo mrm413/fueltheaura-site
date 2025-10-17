@@ -4,6 +4,8 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+  schedule:
+    - cron: "0 2,10,18 * * *"  # 3x/day
 
 permissions:
   contents: read
@@ -21,21 +23,37 @@ jobs:
       - name: Checkout target repo
         uses: actions/checkout@v4
 
+      # Quick diagnostic: prove the PAT can read the private BlogGuru repo
+      - name: Diagnose PAT access
+        shell: bash
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o /dev/null -w "%{http_code}" \
+            -H "Authorization: token ${{ secrets.BLOGURU_TOKEN }}" \
+            -H "User-Agent: pat-diag" \
+            https://api.github.com/repos/mrm413/BlogGuru)
+          echo "GET /repos -> HTTP $code"
+          test "$code" = "200"
+
+      # Use PAT-backed git clone (avoid actions/checkout metadata calls)
       - name: Checkout BlogGuru (read-only)
-        uses: actions/checkout@v4
-        with:
-          repository: mrm413/BlogGuru
-          path: blogsrc
-          fetch-depth: 1
+        shell: bash
+        run: |
+          set -euxo pipefail
+          rm -rf blogsrc
+          git clone --depth=1 "https://x-access-token:${{ secrets.BLOGURU_TOKEN }}@github.com/mrm413/BlogGuru.git" blogsrc
+          git -C blogsrc fetch origin main --depth=1
+          git -C blogsrc checkout -q main
 
       - name: Prepare site
+        shell: bash
         run: |
           set -euxo pipefail
           rm -rf dist && mkdir -p dist
           if [ -d "blogsrc/publish" ]; then
             cp -r blogsrc/publish/* dist/
           else
-            echo "<h1>FuelTheAura — coming online</h1>" > dist/index.html
+            echo "<h1>FuelTheAura - coming online</h1>" > dist/index.html
           fi
 
       - name: Upload Pages artifact
