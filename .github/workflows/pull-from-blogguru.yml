@@ -1,4 +1,4 @@
-name: Pull from BlogGuru and deploy
+﻿name: Pull from BlogGuru and deploy
 
 on:
   push:
