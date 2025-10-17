@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   workflow_dispatch:
   schedule:
-    - cron: "0 2,10,18 * * *"
+    - cron: "0 2,10,18 * * *"  # 3x/day
 
 permissions:
   contents: read
@@ -23,20 +23,18 @@ jobs:
       - name: Checkout target repo
         uses: actions/checkout@v4
 
-      # Quick diagnostic: prove the PAT can read the private BlogGuru repo
-      - name: Diagnose PAT access
+      - name: Diagnose PAT access (BlogGuru)
         shell: bash
         run: |
           set -euo pipefail
           code=$(curl -sS -o /dev/null -w "%{http_code}" \
             -H "Authorization: token ${{ secrets.BLOGURU_TOKEN }}" \
-            -H "User-Agent: pat-diag" \
+            -H "User-Agent: bloguru-pat-diag" \
             https://api.github.com/repos/mrm413/BlogGuru)
-          echo "GET /repos -> HTTP $code"
+          echo "GET /repos/mrm413/BlogGuru -> HTTP $code"
           test "$code" = "200"
 
-      # Use PAT-backed git clone (avoid actions/checkout metadata calls)
-      - name: Checkout BlogGuru (read-only via PAT)
+      - name: Checkout BlogGuru (via PAT git clone)
         shell: bash
         run: |
           set -euxo pipefail
