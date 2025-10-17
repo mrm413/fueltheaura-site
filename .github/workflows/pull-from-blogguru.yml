@@ -23,7 +23,8 @@ jobs:
       - name: Checkout target repo
         uses: actions/checkout@v4
 
-      - name: Diagnose PAT access (BlogGuru)
+      # Prove the PAT can read the private repo; fail fast if not
+      - name: Diagnose PAT access
         shell: bash
         run: |
           set -euo pipefail
@@ -34,14 +35,14 @@ jobs:
           echo "GET /repos/mrm413/BlogGuru -> HTTP $code"
           test "$code" = "200"
 
-      - name: Checkout BlogGuru (via PAT git clone)
+      # ✅ Avoid actions/checkout for BlogGuru: PAT-backed git clone
+      - name: Clone BlogGuru via PAT
         shell: bash
         run: |
           set -euxo pipefail
           rm -rf blogsrc
           git clone --depth=1 "https://x-access-token:${{ secrets.BLOGURU_TOKEN }}@github.com/mrm413/BlogGuru.git" blogsrc
-          git -C blogsrc fetch origin main --depth=1
-          git -C blogsrc checkout -q main
+          git -C blogsrc checkout -q main || true
 
       - name: Prepare site
         shell: bash
