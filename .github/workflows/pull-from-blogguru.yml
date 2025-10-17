@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   workflow_dispatch:
   schedule:
-    - cron: "0 2,10,18 * * *"  # 3x/day
+    - cron: "0 2,10,18 * * *"
 
 permissions:
   contents: read
@@ -24,13 +24,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Verify secret is present
-        shell: bash
         run: |
           set -euo pipefail
-          test -n "${{ secrets.BLOGURU_TOKEN }}" || { echo "BLOGURU_TOKEN is empty/missing"; exit 1; }
+          test -n "${{ secrets.BLOGURU_TOKEN }}" || { echo "BLOGURU_TOKEN missing"; exit 1; }
 
-      - name: Diagnose PAT access
-        shell: bash
+      - name: Diagnose PAT access (BlogGuru)
         run: |
           set -euo pipefail
           code=$(curl -sS -o /dev/null -w "%{http_code}" \
@@ -40,9 +38,7 @@ jobs:
           echo "GET /repos/mrm413/BlogGuru -> HTTP $code"
           test "$code" = "200"
 
-      # PAT-backed git clone avoids checkout's metadata calls to the private repo
-      - name: Clone BlogGuru via PAT
-        shell: bash
+      - name: Checkout BlogGuru (via PAT)
         run: |
           set -euxo pipefail
           rm -rf blogsrc
@@ -50,16 +46,39 @@ jobs:
           git -C blogsrc fetch origin main --depth=1 || true
           git -C blogsrc checkout -q main || true
 
-      - name: Prepare site
-        shell: bash
+      - name: Import BlogGuru -> src/blog (keep structure incl. images)
         run: |
           set -euxo pipefail
-          rm -rf dist && mkdir -p dist
+          mkdir -p src/blog
           if [ -d "blogsrc/publish" ]; then
-            cp -r blogsrc/publish/* dist/
-          else
-            echo "<h1>FuelTheAura — coming online</h1>" > dist/index.html
+            rsync -a --delete --exclude ".git" blogsrc/publish/ src/blog/
           fi
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Autobot - ingest affiliate offers (ClickBank/AliExpress) and generate posts/products
+        env:
+          CLICKBANK_AFFILIATE: ${{ secrets.CLICKBANK_AFFILIATE }}
+          CLICKBANK_FEED_URL: ${{ secrets.CLICKBANK_FEED_URL }}
+          CLICKBANK_RAPIDAPI_KEY: ${{ secrets.CLICKBANK_RAPIDAPI_KEY }}
+          CLICKBANK_RAPIDAPI_HOST: ${{ secrets.CLICKBANK_RAPIDAPI_HOST }}
+          ALIEXPRESS_FEED_URL: ${{ secrets.ALIEXPRESS_FEED_URL }}
+          ALIEXPRESS_RAPIDAPI_KEY: ${{ secrets.ALIEXPRESS_RAPIDAPI_KEY }}
+          ALIEXPRESS_RAPIDAPI_HOST: ${{ secrets.ALIEXPRESS_RAPIDAPI_HOST }}
+          COUNTRY_ALLOWLIST: ${{ secrets.COUNTRY_ALLOWLIST }}
+        run: |
+          set -euxo pipefail
+          node scripts/autobot/run.mjs
+
+      - name: Install deps
+        run: npm install --no-audit --no-fund
+
+      - name: Build site (Eleventy)
+        run: npm run build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
