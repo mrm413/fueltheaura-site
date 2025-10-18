@@ -58,9 +58,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-
-      - name: Autobot - ingest affiliate offers (ClickBank/AliExpress) and generate posts/products
+                - name: Autobot - ingest affiliate offers (ClickBank/AliExpress) and generate posts/products
         env:
           CLICKBANK_AFFILIATE: ${{ secrets.CLICKBANK_AFFILIATE }}
           CLICKBANK_FEED_URL: ${{ secrets.CLICKBANK_FEED_URL }}
