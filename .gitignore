@@ -5,3 +5,7 @@ node_modules/
 
 dist/
 _site/
+dist/
+artifact/
+node_modules/
+blogsrc/
