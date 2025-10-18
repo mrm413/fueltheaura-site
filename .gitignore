@@ -2,3 +2,6 @@ dist/
 out/
 blogsrc/
 node_modules/
+
+dist/
+_site/
