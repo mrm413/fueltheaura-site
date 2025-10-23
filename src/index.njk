@@ -11,67 +11,136 @@
         <nav>
             <div class="logo">Fuel The Aura</div>
             <ul>
-                <li><a href="/">Home</a></li>
+                <li><a href="/" class="nav-link active">Home</a></li>
                 <li><a href="/blog">Blog</a></li>
                 <li><a href="/store">Store</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/contact">Contact</a></li>
+                <li><a href="/terms">Terms</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
-        <h1>Transform Your Energy & Wellness</h1>
-        <p>Science-backed supplements and expert guidance for optimal health</p>
-        <a href="/store" class="cta-button">Shop Now</a>
-    </section>
-
-    <section class="featured-posts">
-        <h2>Latest from the Blog</h2>
-        <div class="post-grid">
-            <article>
-                <h3>Understanding Chronic Fatigue</h3>
-                <p>Discover the root causes and science-backed solutions...</p>
-                <a href="/blog">Read More</a>
-            </article>
-            <article>
-                <h3>Supplement Guide for Energy</h3>
-                <p>Expert recommendations for boosting your vitality...</p>
-                <a href="/blog">Read More</a>
-            </article>
-            <article>
-                <h3>Energy Optimization 101</h3>
-                <p>Transform your daily routine for maximum energy...</p>
-                <a href="/blog">Read More</a>
-            </article>
-        </div>
-    </section>
-
-    <section class="featured-products">
-        <h2>Featured Products</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <h3>Creatine Monohydrate</h3>
-                <p class="price">$29.99</p>
-                <span class="badge">Best Seller</span>
-                <a href="/store" class="buy-button">View Product</a>
-            </div>
-            <div class="product-card">
-                <h3>Ultra Omega-3 Complex</h3>
-                <p class="price">$34.99</p>
-                <a href="/store" class="buy-button">View Product</a>
-            </div>
-            <div class="product-card">
-                <h3>Probiotic 50B CFU</h3>
-                <p class="price">$39.99</p>
-                <span class="badge">New</span>
-                <a href="/store" class="buy-button">View Product</a>
+        <div class="container">
+            <h1>Transform Your Energy & Wellness</h1>
+            <p>Science-backed wellness insights and expert guidance for optimal health</p>
+            <div class="hero-buttons">
+                <a href="/blog" class="btn btn-primary btn-large">Read Our Blog</a>
+                <a href="/about" class="btn btn-secondary btn-large">Learn More</a>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Fuel The Aura. All rights reserved.</p>
+    <section class="featured-section">
+        <div class="container">
+            <h2>Latest from the Blog</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <h3>Understanding Chronic Fatigue</h3>
+                    <p class="blog-excerpt">Discover the root causes and science-backed solutions to overcome persistent tiredness and boost your daily energy levels.</p>
+                    <a href="/blog" class="read-more">Read More →</a>
+                </article>
+                <article class="blog-card">
+                    <h3>Supplement Guide for Energy</h3>
+                    <p class="blog-excerpt">Expert recommendations for natural supplements that can enhance your vitality and support long-term wellness.</p>
+                    <a href="/blog" class="read-more">Read More →</a>
+                </article>
+                <article class="blog-card">
+                    <h3>Energy Optimization 101</h3>
+                    <p class="blog-excerpt">Transform your daily routine with proven strategies to maximize your energy throughout the day.</p>
+                    <a href="/blog" class="read-more">Read More →</a>
+                </article>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="/blog" class="btn btn-primary">View All Blog Posts</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-section bg-light">
+        <div class="container">
+            <h2>Wellness Products Coming Soon</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">
+                We're carefully curating a selection of science-backed wellness products to support your journey toward optimal health. 
+                Sign up for our newsletter to be the first to know when our products launch!
+            </p>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image-placeholder">
+                        <span>Product Image</span>
+                    </div>
+                    <h3>Premium Supplements</h3>
+                    <p class="product-description">High-quality, research-backed supplements for energy and wellness</p>
+                    <span class="product-badge">Coming Soon</span>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-placeholder">
+                        <span>Product Image</span>
+                    </div>
+                    <h3>Wellness Tools</h3>
+                    <p class="product-description">Innovative tools to support your daily wellness routine</p>
+                    <span class="product-badge">Coming Soon</span>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-placeholder">
+                        <span>Product Image</span>
+                    </div>
+                    <h3>Educational Resources</h3>
+                    <p class="product-description">Guides and materials to deepen your wellness knowledge</p>
+                    <span class="product-badge">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Join Our Wellness Community</h2>
+            <p>Subscribe to our newsletter for the latest blog posts, wellness tips, and product updates.</p>
+            <form style="max-width: 500px; margin: 0 auto;">
+                <div class="form-group">
+                    <input type="email" placeholder="Your email address" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-large">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Fuel The Aura</h3>
+                    <p>Science-backed wellness insights and expert guidance for optimal health.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/store">Store</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/terms">Terms</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="/newsletter">Newsletter</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Fuel The Aura. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
