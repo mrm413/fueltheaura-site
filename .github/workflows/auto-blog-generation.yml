@@ -1,0 +1,255 @@
+name: Automated Blog Generation
+
+on:
+  # Run every 4 hours
+  schedule:
+    - cron: '0 */4 * * *'
+  # Also allow manual triggering
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  generate-blog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          pip install anthropic requests beautifulsoup4 lxml
+
+      - name: Generate new blog post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python3 << 'EOF'
+          import os
+          import json
+          import random
+          from datetime import datetime
+          
+          # Health topics rotation (50% physical, 50% mental health)
+          TOPICS = [
+              # Physical Health
+              {"topic": "Natural Energy Boosters", "category": "Physical Health", "keywords": "natural energy, fatigue, supplements"},
+              {"topic": "Sleep Optimization", "category": "Physical Health", "keywords": "sleep quality, insomnia, sleep hygiene"},
+              {"topic": "Nutrition for Wellness", "category": "Physical Health", "keywords": "healthy eating, nutrition, diet"},
+              {"topic": "Exercise and Fitness", "category": "Physical Health", "keywords": "fitness, exercise, workout"},
+              {"topic": "Chronic Pain Management", "category": "Physical Health", "keywords": "pain relief, chronic pain, natural remedies"},
+              # Mental Health
+              {"topic": "Managing Anxiety Naturally", "category": "Mental Health", "keywords": "anxiety relief, stress management, mental health"},
+              {"topic": "Understanding Depression", "category": "Mental Health", "keywords": "depression, mental wellness, mood"},
+              {"topic": "PTSD Recovery Strategies", "category": "Mental Health", "keywords": "PTSD, trauma, healing"},
+              {"topic": "Autism Support Resources", "category": "Mental Health", "keywords": "autism, neurodiversity, support"},
+              {"topic": "Mindfulness and Meditation", "category": "Mental Health", "keywords": "mindfulness, meditation, mental clarity"}
+          ]
+          
+          # Select random topic
+          topic_data = random.choice(TOPICS)
+          
+          # Generate filename
+          timestamp = datetime.now().strftime("%Y-%m-%d-%H%M")
+          filename = f"{timestamp}-{topic_data['topic'].lower().replace(' ', '-')}.njk"
+          filepath = f"src/blog/posts/{filename}"
+          
+          # Generate blog content
+          content = f"""---
+layout: layouts/post.njk
+title: "{topic_data['topic']}: A Comprehensive Guide"
+description: "Discover evidence-based strategies for {topic_data['topic'].lower()}. Learn practical tips and expert insights for better health and wellness."
+date: {datetime.now().strftime("%Y-%m-%d")}
+category: "{topic_data['category']}"
+tags:
+  - {topic_data['keywords'].split(', ')[0]}
+  - {topic_data['keywords'].split(', ')[1]}
+  - wellness
+featured: true
+---
+
+## Introduction to {topic_data['topic']}
+
+In today's fast-paced world, understanding {topic_data['topic'].lower()} has become increasingly important for maintaining optimal health and wellness. This comprehensive guide explores evidence-based strategies and practical approaches to help you achieve better results.
+
+## Understanding the Fundamentals
+
+{topic_data['topic']} is a crucial aspect of overall wellness that affects millions of people worldwide. Research shows that taking a holistic approach can lead to significant improvements in quality of life.
+
+### Key Factors to Consider
+
+1. **Evidence-Based Approaches**: Scientific research provides valuable insights into effective strategies
+2. **Personalized Solutions**: Everyone's journey is unique and requires individualized attention
+3. **Sustainable Practices**: Long-term success comes from consistent, manageable changes
+4. **Professional Guidance**: Working with healthcare providers ensures safe and effective outcomes
+
+## Practical Strategies for Success
+
+### Strategy 1: Building Strong Foundations
+
+Creating a solid foundation is essential for long-term success. This involves:
+
+- Establishing consistent daily routines
+- Setting realistic and achievable goals
+- Tracking progress and making adjustments
+- Celebrating small victories along the way
+
+### Strategy 2: Lifestyle Modifications
+
+Making sustainable lifestyle changes can have profound effects:
+
+- **Nutrition**: Focus on whole, nutrient-dense foods
+- **Physical Activity**: Incorporate regular movement into your daily routine
+- **Sleep Hygiene**: Prioritize quality rest and recovery
+- **Stress Management**: Develop healthy coping mechanisms
+
+### Strategy 3: Mind-Body Connection
+
+The relationship between mental and physical health is undeniable:
+
+- Practice mindfulness and meditation
+- Engage in activities that bring joy and fulfillment
+- Build supportive relationships and community connections
+- Seek professional support when needed
+
+## Common Challenges and Solutions
+
+### Challenge 1: Maintaining Consistency
+
+**Solution**: Start small and build gradually. Focus on one change at a time rather than overwhelming yourself with multiple goals.
+
+### Challenge 2: Dealing with Setbacks
+
+**Solution**: View setbacks as learning opportunities. Adjust your approach based on what works best for your unique situation.
+
+### Challenge 3: Finding Reliable Information
+
+**Solution**: Consult evidence-based sources and healthcare professionals. Be cautious of quick fixes and unproven claims.
+
+## Expert Recommendations
+
+Healthcare professionals emphasize the importance of:
+
+1. **Comprehensive Assessment**: Understanding your individual needs and circumstances
+2. **Integrated Approach**: Combining multiple strategies for optimal results
+3. **Regular Monitoring**: Tracking progress and making necessary adjustments
+4. **Patient Education**: Empowering yourself with knowledge and understanding
+
+## Creating Your Action Plan
+
+### Step 1: Self-Assessment
+
+Take time to evaluate your current situation:
+- What are your primary concerns?
+- What have you tried before?
+- What resources are available to you?
+- What are your goals and priorities?
+
+### Step 2: Setting Goals
+
+Establish SMART goals (Specific, Measurable, Achievable, Relevant, Time-bound):
+- Short-term goals (1-3 months)
+- Medium-term goals (3-6 months)
+- Long-term goals (6-12 months)
+
+### Step 3: Implementation
+
+Put your plan into action:
+- Start with the most impactful changes
+- Build new habits gradually
+- Track your progress consistently
+- Adjust as needed based on results
+
+### Step 4: Ongoing Evaluation
+
+Regularly assess your progress:
+- What's working well?
+- What needs adjustment?
+- Are you moving toward your goals?
+- Do you need additional support?
+
+## The Role of Professional Support
+
+Working with qualified healthcare providers can significantly enhance your journey:
+
+- **Medical Professionals**: Provide diagnosis, treatment, and monitoring
+- **Mental Health Specialists**: Offer therapy and counseling services
+- **Nutritionists**: Guide dietary choices and meal planning
+- **Fitness Experts**: Design appropriate exercise programs
+
+## Long-Term Success Strategies
+
+### Maintaining Motivation
+
+- Connect with your "why" - your deeper reasons for making changes
+- Celebrate progress, no matter how small
+- Find accountability partners or support groups
+- Regularly revisit and update your goals
+
+### Building Resilience
+
+- Develop healthy coping mechanisms for stress
+- Practice self-compassion during difficult times
+- Learn from setbacks rather than viewing them as failures
+- Maintain perspective on the bigger picture
+
+### Continuous Learning
+
+- Stay informed about new research and developments
+- Be open to adjusting your approach based on new information
+- Share your experiences and learn from others
+- Invest in your ongoing education and growth
+
+## Conclusion
+
+{topic_data['topic']} is a journey that requires patience, commitment, and the right strategies. By taking a comprehensive, evidence-based approach and seeking appropriate support, you can achieve meaningful improvements in your health and wellness.
+
+Remember that everyone's path is unique, and what works for one person may not work for another. Be patient with yourself, stay consistent with your efforts, and don't hesitate to seek professional guidance when needed.
+
+## Medical Disclaimer
+
+**Important**: This article is for informational purposes only and is not intended to replace professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read in this article.
+
+If you are experiencing a medical emergency, call your local emergency number immediately.
+
+---
+
+*Ready to take the next step in your wellness journey? Explore our other articles for more evidence-based health and wellness information.*
+"""
+          
+          # Write the file
+          os.makedirs("src/blog/posts", exist_ok=True)
+          with open(filepath, 'w') as f:
+              f.write(content)
+          
+          print(f"✅ Generated new blog post: {filename}")
+          print(f"Topic: {topic_data['topic']}")
+          print(f"Category: {topic_data['category']}")
+          EOF
+
+      - name: Commit and push new blog post
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add src/blog/posts/
+          git diff --staged --quiet || git commit -m "🤖 Auto-generated blog post: $(date +'%Y-%m-%d %H:%M')"
+          git push
+
+      - name: Trigger deployment
+        run: |
+          echo "✅ New blog post committed. Deployment workflow will trigger automatically."
