@@ -1,0 +1,14 @@
+{
+  "name": "fueltheaura-site",
+  "private": true,
+  "scripts": {
+    "build": "eleventy --config eleventy.config.cjs",
+    "dev": "eleventy --serve --port=8080",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^8.6.7"
+  }
+}

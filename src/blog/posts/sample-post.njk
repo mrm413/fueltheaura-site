@@ -1,0 +1,50 @@
+---
+layout: base.njk
+title: Sample Blog Post - Energy Optimization Tips
+description: Learn practical tips to optimize your energy levels naturally throughout the day.
+date: 2025-10-15
+tags: ["energy", "optimization", "wellness"]
+---
+
+<article class="blog-post">
+    <div class="container">
+        <header class="post-header">
+            <h1>{{ title }}</h1>
+            <div class="post-meta">
+                <span class="post-date">{{ date }}</span>
+                <span class="post-tags">
+                    {% for tag in tags %}
+                    <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                </span>
+            </div>
+        </header>
+        
+        <div class="post-content">
+            <p>Energy optimization is more than just getting a good night's sleep or drinking coffee. It's about understanding how your body produces and regulates energy throughout the day, and making strategic choices to maintain consistent levels.</p>
+            
+            <h2>The Science of Energy</h2>
+            <p>At the cellular level, energy production primarily occurs in the mitochondria through a process called cellular respiration. This process converts nutrients from food into adenosine triphosphate (ATP), the primary energy currency of cells.</p>
+            
+            <h2>Key Optimization Strategies</h2>
+            <ol>
+                <li><strong>Nutrition Timing</strong> - Eating balanced meals at consistent times helps regulate energy production.</li>
+                <li><strong>Quality Sleep</strong> - 7-9 hours of uninterrupted sleep allows for proper cellular recovery.</li>
+                <li><strong>Regular Movement</strong> - Short walks throughout the day can boost circulation and energy.</li>
+                <li><strong>Stress Management</strong> - Chronic stress depletes energy reserves through constant cortisol release.</li>
+            </ol>
+            
+            <h2>Natural Energy Boosters</h2>
+            <p>Certain supplements have been clinically studied to support energy production:</p>
+            <ul>
+                <li>Creatine Monohydrate - Supports ATP regeneration</li>
+                <li>Coenzyme Q10 - Essential for mitochondrial function</li>
+                <li>B Complex Vitamins - Critical for energy metabolism</li>
+                <li>Iron (if deficient) - Required for oxygen transport</li>
+            </ul>
+            
+            <h2>Creating Your Routine</h2>
+            <p>The key to sustainable energy optimization is creating a routine that supports your body's natural rhythms. Start with small changes and build consistency before adding more complex strategies.</p>
+        </div>
+    </div>
+</article>

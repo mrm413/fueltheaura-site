@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} - FuelTheAura{% else %}FuelTheAura - Optimize Your Energy{% endif %}</title>
+    <meta name="description" content="{% if description %}{{ description }}{% else %}Evidence-based guides, reviews, and tools for better energy.{% endif %}">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    {% include "nav.njk" %}
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    {% include "footer.njk" %}
+</body>
+</html>

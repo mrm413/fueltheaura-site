@@ -1,0 +1,23 @@
+# Fuel The Aura AI Content System - Python Dependencies
+
+# Web scraping and HTTP
+aiohttp>=3.8.0
+beautifulsoup4>=4.11.0
+lxml>=4.9.0
+requests>=2.28.0
+
+# Natural Language Processing
+nltk>=3.8.0
+textblob>=0.17.0
+
+# Data handling
+sqlite3
+
+# Standard library (included with Python)
+# asyncio
+# json
+# datetime
+# re
+# urllib
+# time
+# collections
