@@ -1,125 +1,77 @@
----
-layout: base.njk
-title: Home
-description: Evidence-based guides, reviews, and tools for sustained energy throughout your day. Shop our science-backed supplements and read our latest energy optimization tips.
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel The Aura - Transform Your Energy & Wellness</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Fuel The Aura</div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/store">Store</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="hero">
-    <div class="hero-content">
-        <h1>Optimize Your Energy Naturally</h1>
-        <p>Evidence-based guides, reviews, and tools for sustained energy throughout your day. Discover science-backed supplements and lifestyle practices that enhance your vitality.</p>
-        <div class="hero-buttons">
-            <a href="/blog/" class="btn btn-primary">Read Latest Blog Posts</a>
-            <a href="/store/" class="btn btn-secondary">Shop Energy Products</a>
-        </div>
-    </div>
-</div>
+    <section class="hero">
+        <h1>Transform Your Energy & Wellness</h1>
+        <p>Science-backed supplements and expert guidance for optimal health</p>
+        <a href="/store" class="cta-button">Shop Now</a>
+    </section>
 
-<section class="featured-section">
-    <div class="container">
+    <section class="featured-posts">
         <h2>Latest from the Blog</h2>
-        <div class="blog-grid">
-            <div class="blog-card">
+        <div class="post-grid">
+            <article>
                 <h3>Understanding Chronic Fatigue</h3>
-                <p class="blog-excerpt">Explore the root causes of persistent tiredness and evidence-based solutions to restore your energy levels.</p>
-                <a href="/blog/posts/understanding-fatigue/" class="read-more">Read More</a>
-            </div>
-            
-            <div class="blog-card">
+                <p>Discover the root causes and science-backed solutions...</p>
+                <a href="/blog">Read More</a>
+            </article>
+            <article>
                 <h3>Supplement Guide for Energy</h3>
-                <p class="blog-excerpt">A comprehensive guide to supplements that genuinely support energy production, based on clinical research.</p>
-                <a href="/blog/posts/supplement-guide/" class="read-more">Read More</a>
-            </div>
-            
-            <div class="blog-card">
+                <p>Expert recommendations for boosting your vitality...</p>
+                <a href="/blog">Read More</a>
+            </article>
+            <article>
                 <h3>Energy Optimization 101</h3>
-                <p class="blog-excerpt">Learn the fundamentals of maintaining consistent energy levels throughout your day.</p>
-                <a href="/blog/posts/sample-post/" class="read-more">Read More</a>
-            </div>
+                <p>Transform your daily routine for maximum energy...</p>
+                <a href="/blog">Read More</a>
+            </article>
         </div>
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="/blog/" class="btn btn-primary">View All Blog Posts</a>
-        </div>
-    </div>
-</section>
+    </section>
 
-<section class="featured-section bg-light">
-    <div class="container">
+    <section class="featured-products">
         <h2>Featured Products</h2>
         <div class="product-grid">
-            <div class="product-card featured">
-                <div class="product-image-placeholder">Creatine Monohydrate</div>
-                <div class="product-badge">Best Seller</div>
+            <div class="product-card">
                 <h3>Creatine Monohydrate</h3>
-                <p class="product-description">Enhances cellular energy production and supports muscle function.</p>
-                <ul class="product-benefits">
-                    <li>✅ Increases ATP production</li>
-                    <li>✅ Supports brain energy</li>
-                    <li>✅ Clinically studied</li>
-                </ul>
-                <div class="product-price">$20.99</div>
-                <a href="/store/" class="btn btn-primary btn-large">Shop Now</a>
+                <p class="price">$29.99</p>
+                <span class="badge">Best Seller</span>
+                <a href="/store" class="buy-button">View Product</a>
             </div>
-            
             <div class="product-card">
-                <div class="product-image-placeholder">Omega-3 Complex</div>
                 <h3>Ultra Omega-3 Complex</h3>
-                <p class="product-description">High-potency fish oil for brain health and reduced fatigue.</p>
-                <ul class="product-benefits">
-                    <li>✅ Supports cognitive function</li>
-                    <li>✅ Reduces inflammation</li>
-                    <li>✅ Heart health benefits</li>
-                </ul>
-                <div class="product-price">$24.99</div>
-                <a href="/store/" class="btn btn-primary btn-large">Shop Now</a>
+                <p class="price">$34.99</p>
+                <a href="/store" class="buy-button">View Product</a>
             </div>
-            
             <div class="product-card">
-                <div class="product-image-placeholder">Probiotic 50B</div>
-                <div class="product-badge">New</div>
                 <h3>Probiotic 50B CFU</h3>
-                <p class="product-description">Advanced gut health support for better nutrient absorption.</p>
-                <ul class="product-benefits">
-                    <li>✅ 50 Billion CFU</li>
-                    <li>✅ 10 Clinically studied strains</li>
-                    <li>✅ Delayed release capsules</li>
-                </ul>
-                <div class="product-price">$32.99</div>
-                <a href="/store/" class="btn btn-primary btn-large">Shop Now</a>
+                <p class="price">$39.99</p>
+                <span class="badge">New</span>
+                <a href="/store" class="buy-button">View Product</a>
             </div>
         </div>
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="/store/" class="btn btn-secondary">View All Products</a>
-        </div>
-    </div>
-</section>
+    </section>
 
-<section class="featured-section">
-    <div class="container">
-        <h2>Why Choose FuelTheAura?</h2>
-        <div class="info-grid">
-            <div class="info-card">
-                <h3>Science-Backed</h3>
-                <p>Every product and recommendation is based on clinical research and scientific evidence.</p>
-            </div>
-            
-            <div class="info-card">
-                <h3>Quality Assured</h3>
-                <p>Third-party tested for purity and potency with transparent reporting.</p>
-            </div>
-            
-            <div class="info-card">
-                <h3>Naturally Focused</h3>
-                <p>Products that support energy without artificial stimulants or harmful additives.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="cta-section">
-    <div class="container">
-        <h2>Ready to Transform Your Energy?</h2>
-        <p>Join thousands of readers who receive weekly insights on energy optimization and special offers on our products.</p>
-        <a href="#" class="btn btn-primary btn-large">Subscribe to Newsletter</a>
-    </div>
-</section>
+    <footer>
+        <p>&copy; 2025 Fuel The Aura. All rights reserved.</p>
+    </footer>
+</body>
+</html>
