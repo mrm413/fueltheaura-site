@@ -14,54 +14,42 @@ description: Evidence-based guides, reviews, and tools for better energy.
 <section class="blog-listing">
     <div class="container">
         <div class="blog-posts">
+            {% for post in collections.blogPosts %}
             <article class="blog-post-preview">
-                <h2><a href="/blog/post-title/">Understanding Energy Metabolism</a></h2>
+                <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
                 <div class="post-meta">
-                    <span class="post-date">October 15, 2025</span>
-                    <span class="post-category">Energy Science</span>
+                    <span class="post-date">{{ post.data.date | date }}</span>
+                    {% if post.data.tags %}
+                    <span class="post-category">{{ post.data.tags[0] }}</span>
+                    {% endif %}
                 </div>
-                <p class="post-excerpt">How your body produces and regulates energy at the cellular level, and what factors can optimize this process...</p>
-                <a href="/blog/post-title/" class="read-more">Continue Reading</a>
+                <p class="post-excerpt">{{ post.data.description | truncate(200) }}</p>
+                <a href="{{ post.url }}" class="read-more">Continue Reading →</a>
             </article>
+            {% endfor %}
             
-            <article class="blog-post-preview">
-                <h2><a href="/blog/post-title/">Natural Energy Boosters</a></h2>
-                <div class="post-meta">
-                    <span class="post-date">October 10, 2025</span>
-                    <span class="post-category">Supplements</span>
-                </div>
-                <p class="post-excerpt">Explore evidence-based supplements that can naturally enhance your energy levels without the crash...</p>
-                <a href="/blog/post-title/" class="read-more">Continue Reading</a>
-            </article>
-            
-            <article class="blog-post-preview">
-                <h2><a href="/blog/post-title/">Sleep and Energy Connection</a></h2>
-                <div class="post-meta">
-                    <span class="post-date">October 5, 2025</span>
-                    <span class="post-category">Lifestyle</span>
-                </div>
-                <p class="post-excerpt">Discover how quality sleep directly impacts your energy levels and what you can do to improve both...</p>
-                <a href="/blog/post-title/" class="read-more">Continue Reading</a>
-            </article>
+            {% if collections.blogPosts.length == 0 %}
+            <p>No blog posts yet. Check back soon!</p>
+            {% endif %}
         </div>
         
         <aside class="blog-sidebar">
             <div class="sidebar-widget">
-                <h3>Categories</h3>
+                <h3>Recent Posts</h3>
                 <ul>
-                    <li><a href="/blog/category/energy-science/">Energy Science</a></li>
-                    <li><a href="/blog/category/supplements/">Supplements</a></li>
-                    <li><a href="/blog/category/lifestyle/">Lifestyle</a></li>
-                    <li><a href="/blog/category/product-reviews/">Product Reviews</a></li>
+                    {% for post in collections.blogPosts | limit(5) %}
+                    <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+                    {% endfor %}
                 </ul>
             </div>
             
             <div class="sidebar-widget">
-                <h3>Popular Posts</h3>
+                <h3>Categories</h3>
                 <ul>
-                    <li><a href="/blog/popular-post-1/">Top 5 Energy Supplements</a></li>
-                    <li><a href="/blog/popular-post-2/">Morning Routine for Energy</a></li>
-                    <li><a href="/blog/popular-post-3/">Energy Myths Debunked</a></li>
+                    <li><a href="/blog/">All Posts ({{ collections.blogPosts.length }})</a></li>
+                    <li><a href="/blog/">Health & Wellness</a></li>
+                    <li><a href="/blog/">Mental Health</a></li>
+                    <li><a href="/blog/">Physical Health</a></li>
                 </ul>
             </div>
         </aside>
