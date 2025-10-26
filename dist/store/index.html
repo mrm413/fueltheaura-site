@@ -35,12 +35,141 @@
                 <p>We're carefully selecting premium, science-backed wellness products to support your journey toward optimal health. Our team is working diligently to bring you high-quality supplements, tools, and resources that align with our commitment to evidence-based wellness.</p>
                 <p>Sign up for our newsletter to be the first to know when our products launch!</p>
                 
-                <form style="max-width: 500px; margin: 2rem auto;">
-                    <div class="form-group">
-                        <input type="email" placeholder="Your email address" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-large">Notify Me When Available</button>
-                </form>
+                <div style="margin: 2rem auto;">
+                    <!-- Newsletter Signup Form Component -->
+<div class="newsletter-signup">
+    <div class="newsletter-content">
+        <h3>📧 Join Our Wellness Community</h3>
+        <p>Get weekly wellness insights delivered every Tuesday. No spam, just value!</p>
+        
+        <!-- Mailchimp Signup Form - REPLACE ACTION URL WITH YOUR MAILCHIMP URL -->
+        <form action="#" method="post" class="newsletter-form" id="newsletter-form">
+            <div class="form-row">
+                <input 
+                    type="email" 
+                    name="email" 
+                    id="newsletter-email" 
+                    placeholder="Enter your email address" 
+                    required
+                    class="newsletter-input"
+                >
+                <button type="submit" class="newsletter-button">
+                    Subscribe
+                </button>
+            </div>
+            <div class="newsletter-benefits">
+                <span>✅ Weekly updates</span>
+                <span>🚫 No spam</span>
+                <span>📚 Exclusive tips</span>
+            </div>
+        </form>
+        
+        <p class="newsletter-note">
+            We respect your privacy. Unsubscribe anytime.
+        </p>
+    </div>
+</div>
+
+<style>
+.newsletter-signup {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.1));
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    border: 2px solid rgba(79, 70, 229, 0.2);
+}
+
+.newsletter-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.newsletter-content h3 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+.newsletter-content p {
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+}
+
+.newsletter-form {
+    margin-bottom: 1rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: 2px solid var(--light-gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.newsletter-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.newsletter-button {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.newsletter-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.newsletter-benefits {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.newsletter-note {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .newsletter-button {
+        width: 100%;
+    }
+    
+    .newsletter-benefits {
+        gap: 1rem;
+        font-size: 0.85rem;
+    }
+}
+</style>
+                </div>
             </div>
 
             <div class="product-grid">
