@@ -37,7 +37,7 @@
         </header>
 
         <div class="post-body">
-            {{ content | safe }}
+            {{ content | markdown | safe }}
         </div>
 
         <nav class="blog-post-nav">
