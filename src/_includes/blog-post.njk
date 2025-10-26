@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+    <title>{{ title }} - Fuel The Aura</title>
     <meta name="description" content="{{ description }}">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
@@ -20,13 +20,32 @@
                 <li><a href="/store">Store</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/contact">Contact</a></li>
-                <li><a href="/terms">Terms</a></li>
             </ul>
         </div>
     </nav>
 
-    {{ content | safe }}
+    <!-- Blog Post Content -->
+    <article class="blog-post-content">
+        <header class="blog-post-header">
+            <h1>{{ title }}</h1>
+            <div class="post-meta">
+                <span class="post-date">{{ date | date }}</span>
+                {% if tags %}
+                <span class="post-category">{{ tags[0] }}</span>
+                {% endif %}
+            </div>
+        </header>
 
+        <div class="post-body">
+            {{ content | safe }}
+        </div>
+
+        <nav class="blog-post-nav">
+            <a href="/blog">← Back to Blog</a>
+        </nav>
+    </article>
+
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-content">
@@ -43,16 +62,14 @@
                         <li><a href="/store">Store</a></li>
                         <li><a href="/about">About</a></li>
                         <li><a href="/contact">Contact</a></li>
-                        <li><a href="/terms">Terms</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Connect</h4>
+                    <h4>Legal</h4>
                     <ul>
-                        <li><a href="/newsletter">Newsletter</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Instagram</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
