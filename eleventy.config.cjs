@@ -1,5 +1,22 @@
+const markdownIt = require("markdown-it");
+
 module.exports = function(eleventyConfig){
   eleventyConfig.setUseGitIgnore(false); // process src/ even if .gitignore ignores it
+  
+  // Configure markdown processing
+  const md = markdownIt({
+    html: true,
+    breaks: true,
+    linkify: true
+  });
+  
+  // Add markdown filter for processing markdown in templates
+  eleventyConfig.addFilter("markdown", function(content) {
+    return md.render(content);
+  });
+  
+  // Set markdown library
+  eleventyConfig.setLibrary("md", md);
   
   // Pass through CSS and other assets
   eleventyConfig.addPassthroughCopy("src/assets");
