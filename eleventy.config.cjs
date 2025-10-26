@@ -25,6 +25,12 @@ module.exports = function(eleventyConfig){
     return stripped.substr(0, length) + '...';
   });
   
+  // Add limit filter for limiting array items
+  eleventyConfig.addFilter("limit", function(array, limit) {
+    if (!Array.isArray(array)) return array;
+    return array.slice(0, limit);
+  });
+  
   return { 
     dir:{ 
       input:"src", 
