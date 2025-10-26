@@ -547,61 +547,70 @@ a:hover {
 }
 /* Blog Post Content Styling */
 .blog-post-content {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: 4rem 3rem;
   background: var(--white);
   border-radius: 0.5rem;
   box-shadow: var(--shadow);
 }
 
 .blog-post-content h1 {
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   color: var(--dark);
-  margin-bottom: 1rem;
-  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .blog-post-content h2 {
-  font-size: 1.875rem;
+  font-size: 2rem;
   color: var(--dark);
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--light-gray);
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid var(--light-gray);
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .blog-post-content h3 {
-  font-size: 1.5rem;
+  font-size: 1.625rem;
   color: var(--dark);
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  font-weight: 600;
 }
 
 .blog-post-content h4 {
-  font-size: 1.25rem;
+  font-size: 1.375rem;
   color: var(--dark);
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
 }
 
 .blog-post-content p {
   font-size: 1.125rem;
-  line-height: 1.8;
-  color: var(--dark);
-  margin-bottom: 1.5rem;
+  line-height: 2;
+  color: #334155;
+  margin-bottom: 2rem;
+  text-align: justify;
 }
 
 .blog-post-content ul,
 .blog-post-content ol {
-  margin-left: 2rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.8;
+  margin-left: 2.5rem;
+  margin-bottom: 2.5rem;
+  margin-top: 1.5rem;
+  line-height: 2;
 }
 
 .blog-post-content li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   font-size: 1.125rem;
+  color: #334155;
 }
 
 .blog-post-content strong {
@@ -669,38 +678,80 @@ a:hover {
 /* Blog Post Header */
 .blog-post-header {
   text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--light-gray);
+  margin-bottom: 4rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 2px solid var(--light-gray);
+}
+
+.blog-post-header h1 {
+  margin-bottom: 1.5rem;
 }
 
 .blog-post-header .post-meta {
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  gap: 1.5rem;
+}
+
+/* Blog Post Body Wrapper */
+.post-body {
+  margin-top: 2rem;
 }
 
 /* Blog Post Navigation */
 .blog-post-nav {
   display: flex;
   justify-content: space-between;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--light-gray);
+  margin-top: 4rem;
+  padding-top: 2.5rem;
+  border-top: 2px solid var(--light-gray);
 }
 
 .blog-post-nav a {
   color: var(--primary);
   font-weight: 600;
+  font-size: 1.125rem;
+  transition: all 0.3s ease;
 }
 
 .blog-post-nav a:hover {
   color: var(--primary-dark);
+  transform: translateX(-5px);
+}
+
+/* Add space around sections */
+.blog-post-content section {
+  margin-bottom: 3rem;
+}
+
+/* Improve list styling */
+.blog-post-content ul li::marker {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.blog-post-content ol li::marker {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* Add breathing room to the page */
+body {
+  background-color: #f8fafc;
+}
+
+.blog-post-content {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 /* Responsive Blog Post */
 @media (max-width: 768px) {
   .blog-post-content {
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   
   .blog-post-content h1 {
@@ -708,15 +759,22 @@ a:hover {
   }
   
   .blog-post-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.625rem;
+    margin-top: 2.5rem;
   }
   
   .blog-post-content h3 {
-    font-size: 1.25rem;
+    font-size: 1.375rem;
+    margin-top: 2rem;
   }
   
   .blog-post-content p,
   .blog-post-content li {
-    font-size: 1rem;
+    font-size: 1.0625rem;
+    line-height: 1.9;
+  }
+  
+  .blog-post-header {
+    margin-bottom: 3rem;
   }
 }
