@@ -1,0 +1,15 @@
+# Machine Learning Dependencies for Predictive Analytics
+
+# Core ML libraries
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+
+# Data processing
+scipy>=1.11.0
+
+# Existing dependencies (ensure compatibility)
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+PyGithub>=2.1.0
