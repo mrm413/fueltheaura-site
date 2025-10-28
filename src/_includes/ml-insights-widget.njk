@@ -1,0 +1,154 @@
+<!-- ML Insights Widget -->
+<div class="ml-insights-widget">
+    <div class="widget-header">
+        <h3>🤖 AI-Powered Insights</h3>
+        <a href="/ml-dashboard/" class="view-all-link">View Dashboard →</a>
+    </div>
+    
+    <div class="widget-content">
+        {% if mlInsights.insights.length > 0 %}
+            {% for insight in mlInsights.insights | slice(0, 3) %}
+            <div class="insight-item priority-{{ insight.priority }}">
+                <div class="insight-icon">
+                    {% if insight.priority == 'high' %}🔴{% elif insight.priority == 'medium' %}🟡{% else %}🔵{% endif %}
+                </div>
+                <div class="insight-text">
+                    <strong>{{ insight.type }}:</strong> {{ insight.description }}
+                </div>
+                <div class="insight-confidence">
+                    {{ (insight.confidence * 100) | round }}% confidence
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-insights">ML system is learning... Check back soon for insights!</p>
+        {% endif %}
+    </div>
+    
+    <div class="widget-stats">
+        <div class="stat-item">
+            <span class="stat-value">{{ mlInsights.stats.totalPredictions }}</span>
+            <span class="stat-label">Predictions</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-value">{{ mlInsights.stats.activeInsights }}</span>
+            <span class="stat-label">Active Insights</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-value">{{ mlInsights.stats.avgImpact }}</span>
+            <span class="stat-label">Avg Impact</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .ml-insights-widget {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 16px;
+        padding: 2rem;
+        color: white;
+        margin: 2rem 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .widget-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .widget-header h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: white;
+    }
+    
+    .view-all-link {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: opacity 0.3s ease;
+    }
+    
+    .view-all-link:hover {
+        opacity: 0.8;
+    }
+    
+    .widget-content {
+        margin-bottom: 1.5rem;
+    }
+    
+    .insight-item {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        backdrop-filter: blur(10px);
+    }
+    
+    .insight-icon {
+        font-size: 1.5rem;
+    }
+    
+    .insight-text {
+        flex: 1;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    
+    .insight-confidence {
+        font-size: 0.85rem;
+        opacity: 0.9;
+        white-space: nowrap;
+    }
+    
+    .no-insights {
+        text-align: center;
+        padding: 2rem;
+        opacity: 0.8;
+    }
+    
+    .widget-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .stat-item {
+        text-align: center;
+    }
+    
+    .stat-value {
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+    
+    .stat-label {
+        display: block;
+        font-size: 0.85rem;
+        opacity: 0.9;
+    }
+    
+    @media (max-width: 768px) {
+        .ml-insights-widget {
+            padding: 1.5rem;
+        }
+        
+        .insight-item {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .widget-stats {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

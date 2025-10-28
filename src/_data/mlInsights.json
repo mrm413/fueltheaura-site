@@ -1,0 +1,169 @@
+{
+  "lastUpdated": "2025-10-28T00:43:21.994904",
+  "stats": {
+    "totalPredictions": 56,
+    "activeInsights": 4,
+    "modelsTrained": 1,
+    "avgImpact": 0.61
+  },
+  "insights": [
+    {
+      "type": "improvement_pattern",
+      "category": "optimization",
+      "description": "'UX' improvements have highest average impact (0.64)",
+      "confidence": 0.85,
+      "action": "Prioritize UX improvements for maximum impact",
+      "priority": "high",
+      "timestamp": "2025-10-27T19:17:19.283180"
+    },
+    {
+      "type": "improvement_pattern",
+      "category": "optimization",
+      "description": "'UX' improvements have highest average impact (0.64)",
+      "confidence": 0.85,
+      "action": "Prioritize UX improvements for maximum impact",
+      "priority": "high",
+      "timestamp": "2025-10-27T19:18:25.304710"
+    },
+    {
+      "type": "timing_optimization",
+      "category": "scheduling",
+      "description": "Improvements made around 19:00 have higher impact",
+      "confidence": 0.75,
+      "action": "Schedule critical improvements for 19:00",
+      "priority": "medium",
+      "timestamp": "2025-10-27T19:17:19.284119"
+    },
+    {
+      "type": "timing_optimization",
+      "category": "scheduling",
+      "description": "Improvements made around 19:00 have higher impact",
+      "confidence": 0.75,
+      "action": "Schedule critical improvements for 19:00",
+      "priority": "medium",
+      "timestamp": "2025-10-27T19:18:25.305597"
+    }
+  ],
+  "predictions": [
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-03",
+      "value": 0.673,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-03",
+      "value": 0.63,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-03",
+      "value": 0.491,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-03",
+      "value": 0.482,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-03",
+      "value": 0.673,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-03",
+      "value": 0.63,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-03",
+      "value": 0.491,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-03",
+      "value": 0.482,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-02",
+      "value": 0.555,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-02",
+      "value": 0.601,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-02",
+      "value": 0.505,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-02",
+      "value": 0.496,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-02",
+      "value": 0.555,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-02",
+      "value": 0.601,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-02",
+      "value": 0.505,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-02",
+      "value": 0.496,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-01",
+      "value": 0.643,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-01",
+      "value": 0.683,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-01",
+      "value": 0.601,
+      "confidence": 0.75
+    },
+    {
+      "type": "improvement_opportunities",
+      "date": "2025-11-01",
+      "value": 0.552,
+      "confidence": 0.75
+    }
+  ]
+}
