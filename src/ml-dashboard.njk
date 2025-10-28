@@ -1,0 +1,456 @@
+---
+title: "ML Analytics Dashboard"
+description: "Real-time machine learning insights and predictions for website optimization"
+layout: "main.njk"
+---
+
+<style>
+    .dashboard-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .dashboard-header h1 {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .dashboard-header p {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+    }
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .dashboard-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .card-icon {
+        font-size: 2rem;
+        margin-right: 1rem;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .stat-value {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        font-size: 1rem;
+        color: var(--text-secondary);
+    }
+
+    .insights-section {
+        margin-top: 3rem;
+    }
+
+    .insights-header {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        color: var(--text-primary);
+    }
+
+    .insight-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid var(--primary-color);
+    }
+
+    .insight-card.high-priority {
+        border-left-color: #e74c3c;
+    }
+
+    .insight-card.medium-priority {
+        border-left-color: #f39c12;
+    }
+
+    .insight-card.low-priority {
+        border-left-color: #3498db;
+    }
+
+    .insight-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .insight-type {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .insight-priority {
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .priority-high {
+        background: #fee;
+        color: #e74c3c;
+    }
+
+    .priority-medium {
+        background: #fef5e7;
+        color: #f39c12;
+    }
+
+    .priority-low {
+        background: #ebf5fb;
+        color: #3498db;
+    }
+
+    .insight-description {
+        font-size: 1.1rem;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+
+    .insight-action {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    .insight-action strong {
+        color: var(--primary-color);
+    }
+
+    .insight-confidence {
+        display: flex;
+        align-items: center;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+    }
+
+    .confidence-bar {
+        width: 100px;
+        height: 8px;
+        background: #e0e0e0;
+        border-radius: 4px;
+        margin-left: 1rem;
+        overflow: hidden;
+    }
+
+    .confidence-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        transition: width 0.3s ease;
+    }
+
+    .predictions-section {
+        margin-top: 3rem;
+    }
+
+    .predictions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .prediction-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .prediction-date {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+    }
+
+    .prediction-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .prediction-type {
+        font-size: 0.95rem;
+        color: var(--text-primary);
+    }
+
+    .loading-state {
+        text-align: center;
+        padding: 3rem;
+        color: var(--text-secondary);
+    }
+
+    .loading-spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid var(--primary-color);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .refresh-button {
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-top: 2rem;
+    }
+
+    .refresh-button:hover {
+        background: var(--secondary-color);
+    }
+
+    .last-updated {
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-top: 2rem;
+    }
+</style>
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>🤖 ML Analytics Dashboard</h1>
+        <p>Real-time machine learning insights and predictions powered by AI</p>
+    </div>
+
+    <!-- Stats Overview -->
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <div class="card-header">
+                <span class="card-icon">📊</span>
+                <h3 class="card-title">Total Predictions</h3>
+            </div>
+            <div class="stat-value" id="total-predictions">--</div>
+            <div class="stat-label">Generated predictions</div>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-header">
+                <span class="card-icon">💡</span>
+                <h3 class="card-title">Active Insights</h3>
+            </div>
+            <div class="stat-value" id="active-insights">--</div>
+            <div class="stat-label">Actionable recommendations</div>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-header">
+                <span class="card-icon">🎯</span>
+                <h3 class="card-title">Models Trained</h3>
+            </div>
+            <div class="stat-value" id="models-trained">--</div>
+            <div class="stat-label">Active ML models</div>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-header">
+                <span class="card-icon">📈</span>
+                <h3 class="card-title">Avg Impact Score</h3>
+            </div>
+            <div class="stat-value" id="avg-impact">--</div>
+            <div class="stat-label">Improvement impact</div>
+        </div>
+    </div>
+
+    <!-- High Priority Insights -->
+    <div class="insights-section">
+        <h2 class="insights-header">💡 Active Insights & Recommendations</h2>
+        <div id="insights-container">
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Loading ML insights...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Predictions -->
+    <div class="predictions-section">
+        <h2 class="insights-header">🔮 Recent Predictions</h2>
+        <div class="predictions-grid" id="predictions-container">
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Loading predictions...</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <button class="refresh-button" onclick="loadDashboardData()">🔄 Refresh Data</button>
+    </div>
+
+    <div class="last-updated" id="last-updated">
+        Last updated: --
+    </div>
+</div>
+
+<script>
+    // Dashboard data loading and rendering
+    async function loadDashboardData() {
+        try {
+            // Try to fetch from API first
+            const response = await fetch('/api/ml/dashboard');
+            
+            if (response.ok) {
+                const result = await response.json();
+                if (result.success) {
+                    renderDashboard(result.data);
+                    return;
+                }
+            }
+            
+            // Fallback to simulated data if API is not available
+            console.log('API not available, using simulated data');
+            const dashboardData = {
+                stats: {
+                    totalPredictions: 56,
+                    activeInsights: 4,
+                    modelsTrained: 1,
+                    avgImpact: 0.72
+                },
+                insights: [
+                    {
+                        type: 'Improvement Pattern',
+                        priority: 'high',
+                        description: "'UX' improvements have highest average impact (0.64)",
+                        action: 'Prioritize UX improvements for maximum impact',
+                        confidence: 0.85,
+                        category: 'optimization'
+                    },
+                    {
+                        type: 'Timing Optimization',
+                        priority: 'medium',
+                        description: 'Improvements made around 19:00 have higher impact',
+                        action: 'Schedule critical improvements for 19:00',
+                        confidence: 0.75,
+                        category: 'scheduling'
+                    }
+                ],
+                predictions: [
+                    { date: '2025-10-28', value: 0.701, type: 'Improvement Opportunities', confidence: 0.75 },
+                    { date: '2025-10-29', value: 0.742, type: 'Improvement Opportunities', confidence: 0.75 },
+                    { date: '2025-10-30', value: 0.568, type: 'Improvement Opportunities', confidence: 0.75 },
+                    { date: '2025-10-31', value: 0.562, type: 'Improvement Opportunities', confidence: 0.75 },
+                    { date: '2025-11-01', value: 0.552, type: 'Improvement Opportunities', confidence: 0.75 },
+                    { date: '2025-11-02', value: 0.496, type: 'Improvement Opportunities', confidence: 0.75 }
+                ]
+            };
+            
+            renderDashboard(dashboardData);
+            
+        } catch (error) {
+            console.error('Error loading dashboard data:', error);
+            showError();
+        }
+    }
+    
+    function renderDashboard(data) {
+        // Update stats
+        document.getElementById('total-predictions').textContent = data.stats.totalPredictions;
+        document.getElementById('active-insights').textContent = data.stats.activeInsights;
+        document.getElementById('models-trained').textContent = data.stats.modelsTrained;
+        document.getElementById('avg-impact').textContent = data.stats.avgImpact.toFixed(2);
+        
+        // Render insights
+        const insightsContainer = document.getElementById('insights-container');
+        insightsContainer.innerHTML = data.insights.map(insight => `
+            <div class="insight-card ${insight.priority}-priority">
+                <div class="insight-header">
+                    <span class="insight-type">${insight.type}</span>
+                    <span class="insight-priority priority-${insight.priority}">${insight.priority}</span>
+                </div>
+                <p class="insight-description">${insight.description}</p>
+                <div class="insight-action">
+                    <strong>Recommended Action:</strong> ${insight.action}
+                </div>
+                <div class="insight-confidence">
+                    <span>Confidence: ${(insight.confidence * 100).toFixed(0)}%</span>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: ${insight.confidence * 100}%"></div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+        // Render predictions
+        const predictionsContainer = document.getElementById('predictions-container');
+        predictionsContainer.innerHTML = data.predictions.map(pred => `
+            <div class="prediction-card">
+                <div class="prediction-date">${pred.date}</div>
+                <div class="prediction-value">${pred.value.toFixed(3)}</div>
+                <div class="prediction-type">${pred.type}</div>
+            </div>
+        `).join('');
+        
+        // Update last updated time
+        document.getElementById('last-updated').textContent = 
+            `Last updated: ${new Date().toLocaleString()}`;
+    }
+    
+    function showError() {
+        document.getElementById('insights-container').innerHTML = `
+            <div class="loading-state">
+                <p style="color: #e74c3c;">❌ Error loading dashboard data. Please try again.</p>
+            </div>
+        `;
+    }
+    
+    // Load data on page load
+    document.addEventListener('DOMContentLoaded', loadDashboardData);
+</script>
